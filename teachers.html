@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#153b70">
+    <meta name="description" content="M.P. Mission School web app">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <title>Teacher Management</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="login-box">
+        <h1>Teacher Management</h1>
+        <p>Add and Manage School Teachers</p>
+
+        <form id="teacherForm">
+            <h2 id="teacherFormTitle">Add New Teacher</h2>
+
+            <input type="text" id="teacherName"
+                placeholder="Teacher Name" required>
+
+            <input type="text" id="employeeId"
+                placeholder="Employee ID" required>
+
+            <input type="text" id="subject"
+                placeholder="Subject" required>
+
+            <input type="tel" id="teacherMobile"
+                placeholder="Mobile Number" required>
+
+            <button type="submit" id="teacherSubmitButton">
+                Add Teacher
+            </button>
+
+            <button type="button" id="cancelTeacherEdit"
+                style="display:none;"
+                onclick="window.cancelTeacherEdit()">
+                Cancel Edit
+            </button>
+        </form>
+
+        <h2>Teacher List</h2>
+
+        <input type="search" id="teacherSearch"
+            placeholder="Search by Name or Employee ID">
+
+        <div id="teacherList"></div>
+
+        <button onclick="window.location.href='admin.html'">
+            Back to Dashboard
+        </button>
+    </div>
+
+    <script src="script.js"></script>
+<script>
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function () {
+        navigator.serviceWorker.register("./service-worker.js")
+            .catch(function (error) { console.error("Service worker registration failed:", error); });
+    });
+}
+</script>
+</body>
+</html>

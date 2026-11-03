@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#153b70">
+    <meta name="description" content="M.P. Mission School web app">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <title>Student Dashboard - M.P. Mission School</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="header">
+    <div class="school-logo">MP</div>
+    <div>
+        <h1>M.P. Mission School</h1>
+        <p>Student Dashboard</p>
+    </div>
+</header>
+
+<main class="admin-container">
+    <h2>Welcome, Student!</h2>
+    <p>Student Portal</p>
+
+    <section class="admin-card">
+        <h3>My Profile</h3>
+        <p><strong>Name:</strong> Demo Student</p>
+        <p><strong>Class:</strong> 8</p>
+        <p><strong>Roll Number:</strong> 101</p>
+    </section>
+
+    <section class="admin-grid">
+        <div class="admin-card">
+            <h3>Attendance</h3>
+            <p>View your attendance records.</p>
+            <button onclick="window.location.href='attendance.html'">View Attendance</button>
+        </div>
+
+        <div class="admin-card">
+            <h3>Homework</h3>
+            <p>Check your assigned homework.</p>
+            <button onclick="window.location.href='homework.html'">View Homework</button>
+        </div>
+
+        <div class="admin-card">
+            <h3>Results</h3>
+            <p>View your examination results.</p>
+            <button onclick="window.location.href='result.html'">View Results</button>
+        </div>
+
+        <div class="admin-card">
+            <h3>Fees</h3>
+            <p>View your fee records.</p>
+            <button onclick="window.location.href='fees.html'">View Fees</button>
+        </div>
+
+        <div class="admin-card">
+            <h3>Notice Board</h3>
+            <p>Read school announcements.</p>
+            <button onclick="window.location.href='notice.html'">View Notices</button>
+        </div>
+    </section>
+
+    <button class="logout" onclick="logout()">Logout</button>
+</main>
+
+<script src="script.js"></script>
+<script>
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function () {
+        navigator.serviceWorker.register("./service-worker.js")
+            .catch(function (error) { console.error("Service worker registration failed:", error); });
+    });
+}
+</script>
+</body>
+</html>

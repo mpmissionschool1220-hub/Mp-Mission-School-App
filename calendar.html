@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#153b70">
+    <meta name="description" content="M.P. Mission School web app">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <title>School Calendar - M.P. Mission School</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="school-logo">MP</div>
+        <div>
+            <h1>M.P. Mission School</h1>
+            <p>School Calendar</p>
+        </div>
+    </header>
+
+    <main class="admin-container">
+
+        <h2>School Calendar</h2>
+        <p>Manage Holidays, Exams and School Events</p>
+
+        <section class="admin-card">
+            <h3>➕ Add New Event</h3>
+
+            <form id="calendarForm">
+
+                <label>Event Name</label>
+                <input type="text" id="eventName" placeholder="Enter event name" required>
+
+                <label>Event Date</label>
+                <input type="date" id="eventDate" required>
+
+                <label>Event Type</label>
+                <select id="eventType" required>
+                    <option value="">Select Event Type</option>
+                    <option value="Holiday">Holiday</option>
+                    <option value="Examination">Examination</option>
+                    <option value="School Event">School Event</option>
+                </select>
+
+                <label>Description</label>
+                <textarea id="eventDescription" placeholder="Enter event details"></textarea>
+
+                <button type="submit">Add Event</button>
+
+            </form>
+        </section>
+
+        <section class="admin-card">
+            <h3>📅 Upcoming Events</h3>
+            <div id="calendarList">
+                <p>No events added yet.</p>
+            </div>
+        </section>
+
+        <button onclick="window.location.href='admin.html'">
+            Back to Admin Dashboard
+        </button>
+
+    </main>
+
+    <script src="script.js"></script>
+    <script src="calendar.js"></script>
+
+<script>
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function () {
+        navigator.serviceWorker.register("./service-worker.js")
+            .catch(function (error) { console.error("Service worker registration failed:", error); });
+    });
+}
+</script>
+</body>
+</html>

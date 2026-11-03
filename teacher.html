@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#153b70">
+    <meta name="description" content="M.P. Mission School web app">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <title>Teacher Dashboard - M.P. Mission School</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="header">
+    <div class="school-logo">MP</div>
+    <div>
+        <h1>M.P. Mission School</h1>
+        <p>Teacher Dashboard</p>
+    </div>
+</header>
+
+<main class="admin-container">
+
+    <h2>Welcome, Teacher!</h2>
+    <p>Manage your class activities here.</p>
+
+    <section class="dashboard-cards">
+
+        <div class="dashboard-card">
+            <h3>Total Students</h3>
+            <h2 id="teacherTotalStudents">0</h2>
+        </div>
+
+        <div class="dashboard-card">
+            <h3>Total Homework</h3>
+            <h2 id="teacherTotalHomework">0</h2>
+        </div>
+
+        <div class="dashboard-card">
+            <h3>Total Notices</h3>
+            <h2 id="teacherTotalNotices">0</h2>
+        </div>
+
+    </section>
+
+    <section class="box">
+        <h2>Student List</h2>
+        <div id="teacherStudentList"></div>
+    </section>
+
+    <section class="box">
+        <h2>Homework List</h2>
+        <div id="teacherHomeworkList"></div>
+    </section>
+
+    <section class="box">
+        <h2>Notice Board</h2>
+        <div id="teacherNoticeList"></div>
+    </section>
+
+    <button onclick="window.logout()">
+        Logout
+    </button>
+
+</main>
+
+<script src="script.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    function getRecords(key) {
+        try {
+            const data = JSON.parse(localStorage.getItem(key));
+            return Array.isArray(data) ? data : [];
+        } catch (error) {
+            return [];
+        }
+    }
+
+    const students = getRecords("students");
+    const homework = getRecords("homeworkRecords");
+    const notices = getRecords("notices");
+
+    document.getElementById("teacherTotalStudents").textContent =
+        students.length;
+
+    document.getElementById("teacherTotalHomework").textContent =
+        homework.length;
+
+    document.getElementById("teacherTotalNotices").textContent =
+        notices.length;
+
+    const studentList = document.getElementById("teacherStudentList");
+
+    if (students.length === 0) {
+        studentList.textContent = "No students added yet.";
+    } else {
+        students.forEach(student => {
+            const card = document.createElement("div");
+            card.className = "student-card";
+
+            const details = document.createElement("p");
+            details.textContent =
+                "Name: " + student.name +
+                " | Roll: " + student.roll +
+                " | Class: " + student.studentClass;
+
+            card.appendChild(details);
+            studentList.appendChild(card);
+        });
+    }
+
+    const homeworkList = document.getElementById("teacherHomeworkList");
+
+    if (homework.length === 0) {
+        homeworkList.textContent = "No homework available.";
+    } else {
+        homework.forEach(hw => {
+            const card = document.createElement("div");
+            card.className = "homework-card";
+
+            const details = document.createElement("p");
+            details.textContent =
+                "Class: " + (hw.studentClass || hw.className) +
+                " | Subject: " + hw.subject +
+                " | Homework: " + hw.details +
+                " | Last Date: " + hw.date;
+
+            card.appendChild(details);
+            homeworkList.appendChild(card);
+        });
+    }
+
+    const noticeList = document.getElementById("teacherNoticeList");
+
+    if (notices.length === 0) {
+        noticeList.textContent = "No notices published yet.";
+    } else {
+        notices.forEach(notice => {
+            const card = document.createElement("div");
+            card.className = "notice-card";
+
+            const title = document.createElement("h3");
+            title.textContent = notice.title;
+
+            const details = document.createElement("p");
+            details.textContent = notice.details;
+
+            const date = document.createElement("p");
+            date.textContent = "Date: " + notice.date;
+
+            card.append(title, details, date);
+            noticeList.appendChild(card);
+        });
+    }
+
+});
+</script>
+
+<script>
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function () {
+        navigator.serviceWorker.register("./service-worker.js")
+            .catch(function (error) { console.error("Service worker registration failed:", error); });
+    });
+}
+</script>
+</body>
+</html>

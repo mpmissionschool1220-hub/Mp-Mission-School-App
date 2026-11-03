@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#153b70">
+    <meta name="description" content="M.P. Mission School web app">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <title>Notice Board - M.P. Mission School</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>📢 Notice Board</h1>
+        <p>M.P. Mission School</p>
+
+        <h2>Add New Notice</h2>
+
+        <form id="noticeForm">
+            <label>Notice Title</label>
+            <input type="text" id="noticeTitle"
+                placeholder="Enter Notice Title" required>
+
+            <label>Notice Details</label>
+            <textarea id="noticeDetails"
+                placeholder="Write Notice..." required></textarea>
+
+            <label>Notice Date</label>
+            <input type="date" id="noticeDate" required>
+
+            <button type="submit">Publish Notice</button>
+        </form>
+
+        <h2>Published Notices</h2>
+        <div id="noticeList"></div>
+
+        <button onclick="window.location.href='admin.html'">
+            Back to Dashboard
+        </button>
+    </div>
+
+    <script src="script.js"></script>
+<script>
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function () {
+        navigator.serviceWorker.register("./service-worker.js")
+            .catch(function (error) { console.error("Service worker registration failed:", error); });
+    });
+}
+</script>
+</body>
+</html>

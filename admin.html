@@ -1,0 +1,172 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#153b70">
+    <meta name="description" content="M.P. Mission School web app">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <title>Admin Dashboard - M.P. Mission School</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .summary-card {
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .summary-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div class="school-logo">MP</div>
+    <div>
+        <h1>M.P. Mission School</h1>
+        <p>Admin Dashboard</p>
+    </div>
+</header>
+
+<main class="admin-container">
+
+    <h2>Welcome, Admin!</h2>
+    <p>School Management Dashboard</p>
+
+    <!-- SCHOOL INFORMATION -->
+    <section class="admin-card">
+        <h3>🏫 School Information</h3>
+        <p><strong>School Name:</strong> M.P. Mission School</p>
+        <p><strong>Address:</strong> बंगरा बथना कुट्टी, गोपालगंज, बिहार - 841503</p>
+        <p><strong>Mobile Number 1:</strong> 9572142779</p>
+        <p><strong>Mobile Number 2:</strong> 9277465155</p>
+        <p><strong>School Type:</strong> Mission School</p>
+    </section>
+
+    <!-- DASHBOARD SUMMARY -->
+    <h2>📊 Dashboard Summary</h2>
+
+    <section class="admin-grid">
+
+        <div class="admin-card summary-card"
+             onclick="window.location.href='students.html'"
+             role="link" tabindex="0"
+             onkeydown="if(event.key==='Enter') window.location.href='students.html'">
+            <h3>👨‍🎓 Total Students</h3>
+            <h2 id="totalStudents">0</h2>
+            <p>Click to view students</p>
+        </div>
+
+        <div class="admin-card summary-card"
+             onclick="window.location.href='teachers.html'"
+             role="link" tabindex="0"
+             onkeydown="if(event.key==='Enter') window.location.href='teachers.html'">
+            <h3>👩‍🏫 Total Teachers</h3>
+            <h2 id="totalTeachers">0</h2>
+            <p>Click to view teachers</p>
+        </div>
+
+        <div class="admin-card summary-card"
+             onclick="window.location.href='calendar.html'"
+             role="link" tabindex="0"
+             onkeydown="if(event.key==='Enter') window.location.href='calendar.html'">
+            <h3>🗓️ Calendar Events</h3>
+            <h2 id="totalEvents">0</h2>
+            <p>Click to view calendar</p>
+        </div>
+
+    </section>
+
+    <!-- ADMIN DASHBOARD -->
+    <section class="admin-grid">
+
+        <div class="admin-card">
+            <span>👨‍🎓</span>
+            <h3>Students</h3>
+            <p>Manage Students</p>
+            <button onclick="window.location.href='students.html'">Manage Students</button>
+        </div>
+
+        <div class="admin-card">
+            <span>👩‍🏫</span>
+            <h3>Teachers</h3>
+            <p>Manage Teachers</p>
+            <button onclick="window.location.href='teachers.html'">Manage Teachers</button>
+        </div>
+
+        <div class="admin-card">
+            <span>📅</span>
+            <h3>Attendance</h3>
+            <p>Manage Attendance</p>
+            <button onclick="window.location.href='attendance.html'">Attendance</button>
+        </div>
+
+        <div class="admin-card">
+            <span>📚</span>
+            <h3>Homework</h3>
+            <p>Manage Homework</p>
+            <button onclick="window.location.href='homework.html'">Homework</button>
+        </div>
+
+        <div class="admin-card">
+            <span>📊</span>
+            <h3>Results</h3>
+            <p>Manage Results</p>
+            <button onclick="window.location.href='result.html'">Manage Results</button>
+        </div>
+
+        <div class="admin-card">
+            <span>💰</span>
+            <h3>Fees</h3>
+            <p>Manage Fees</p>
+            <button onclick="window.location.href='fees.html'">Manage Fees</button>
+        </div>
+
+        <div class="admin-card">
+            <span>📢</span>
+            <h3>Notice Board</h3>
+            <p>Manage Notices</p>
+            <button onclick="window.location.href='notice.html'">Manage Notices</button>
+        </div>
+
+        <div class="admin-card">
+            <span>🗓️</span>
+            <h3>School Calendar</h3>
+            <p>View school holidays, exams and events.</p>
+            <button onclick="window.location.href='calendar.html'">Open Calendar</button>
+        </div>
+
+    </section>
+
+    <p id="admin-message"></p>
+    <button class="logout" onclick="logout()">Logout</button>
+
+</main>
+
+<script src="script.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const students = JSON.parse(localStorage.getItem("students")) || [];
+    const teachers = JSON.parse(localStorage.getItem("teachers")) || [];
+    const events = JSON.parse(localStorage.getItem("schoolCalendarEvents")) || [];
+
+    document.getElementById("totalStudents").textContent = students.length;
+    document.getElementById("totalTeachers").textContent = teachers.length;
+    document.getElementById("totalEvents").textContent = events.length;
+});
+</script>
+
+<script>
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function () {
+        navigator.serviceWorker.register("./service-worker.js")
+            .catch(function (error) { console.error("Service worker registration failed:", error); });
+    });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#153b70">
+    <meta name="description" content="M.P. Mission School web app">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <title>Homework Management</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Homework Management</h1>
+        <p>M.P. Mission School</p>
+
+        <h2>Add New Homework</h2>
+
+        <form id="homeworkForm">
+            <label>Class</label>
+            <select id="hwClass" required>
+                <option value="">Select Class</option>
+                <option>Nursery</option>
+                <option>LKG</option>
+                <option>UKG</option>
+                <option>1st</option>
+                <option>2nd</option>
+                <option>3rd</option>
+                <option>4th</option>
+                <option>5th</option>
+                <option>6th</option>
+                <option>7th</option>
+                <option>8th</option>
+                <option>9th</option>
+                <option>10th</option>
+            </select>
+
+            <label>Subject</label>
+            <input type="text" id="hwSubject" placeholder="Enter Subject" required>
+
+            <label>Homework Details</label>
+            <textarea id="hwDetails" placeholder="Write Homework..." required></textarea>
+
+            <label>Last Date</label>
+            <input type="date" id="hwDate" required>
+
+            <button type="submit">Add Homework</button>
+        </form>
+
+        <h2>Homework List</h2>
+        <div id="homeworkList"></div>
+
+        <button onclick="window.location.href='admin.html'">
+            Back to Dashboard
+        </button>
+    </div>
+
+    <script src="script.js"></script>
+<script>
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function () {
+        navigator.serviceWorker.register("./service-worker.js")
+            .catch(function (error) { console.error("Service worker registration failed:", error); });
+    });
+}
+</script>
+</body>
+</html>

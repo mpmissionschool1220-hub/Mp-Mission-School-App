@@ -1,0 +1,214 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#153b70">
+    <meta name="description" content="M.P. Mission School web app">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <title>Result Management - M.P. Mission School</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: auto;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #1d4ed8;
+        }
+
+        .form-box, .result-box {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px #00000015;
+        }
+
+        label {
+            display: block;
+            margin-top: 12px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 11px;
+            margin-top: 6px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+        }
+
+        button {
+            padding: 11px 16px;
+            margin-top: 15px;
+            border: none;
+            border-radius: 6px;
+            background: #2563eb;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        .result-card {
+            padding: 15px;
+            margin: 12px 0;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+        }
+
+        .back-btn {
+            background: #475569;
+        }
+
+        #marksheet {
+            background: white;
+            padding: 25px;
+            margin-top: 20px;
+        }
+
+        #marksheet table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        #marksheet th, #marksheet td {
+            border: 1px solid #333;
+            padding: 10px;
+            text-align: center;
+        }
+
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+
+            #marksheet, #marksheet * {
+                visibility: visible;
+            }
+
+            #marksheet {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>M.P. MISSION SCHOOL</h1>
+    <h2>Result Management System</h2>
+
+    <div class="form-box">
+        <h2>Add Student Result</h2>
+
+        <form id="resultForm">
+
+            <label>Student Name</label>
+            <input type="text" id="resultName" required>
+
+            <label>Roll Number</label>
+            <input type="text" id="resultRoll" required>
+
+            <label>Class</label>
+            <select id="resultClass" required>
+                <option value="">Select Class</option>
+                <option>Nursery</option>
+                <option>LKG</option>
+                <option>UKG</option>
+                <option>1st</option>
+                <option>2nd</option>
+                <option>3rd</option>
+                <option>4th</option>
+                <option>5th</option>
+                <option>6th</option>
+                <option>7th</option>
+                <option>8th</option>
+                <option>9th</option>
+                <option>10th</option>
+            </select>
+
+            <label>Exam</label>
+            <select id="examName" required>
+                <option value="">Select Exam</option>
+                <option>Monthly Test</option>
+                <option>Half Yearly</option>
+                <option>Annual Exam</option>
+            </select>
+
+            <label>English Marks (Out of 100)</label>
+            <input type="number" id="english" min="0" max="100" required>
+
+            <label>Hindi Marks (Out of 100)</label>
+            <input type="number" id="hindi" min="0" max="100" required>
+
+            <label>Maths Marks (Out of 100)</label>
+            <input type="number" id="maths" min="0" max="100" required>
+
+            <label>Science Marks (Out of 100)</label>
+            <input type="number" id="science" min="0" max="100" required>
+
+            <label>Social Science Marks (Out of 100)</label>
+            <input type="number" id="social" min="0" max="100" required>
+
+            <button type="submit">Save Result</button>
+
+        </form>
+    </div>
+
+    <div class="result-box">
+        <h2>Saved Results</h2>
+        <div id="resultList"></div>
+    </div>
+
+    <div id="marksheet"></div>
+
+    <button type="button" onclick="window.print()">
+        Print Marksheet
+    </button>
+
+    <button type="button" class="back-btn"
+        onclick="window.location.href='admin.html'">
+        Back to Dashboard
+    </button>
+
+</div>
+
+<script src="script.js"></script>
+
+<script>
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function () {
+        navigator.serviceWorker.register("./service-worker.js")
+            .catch(function (error) { console.error("Service worker registration failed:", error); });
+    });
+}
+</script>
+</body>
+</html>
