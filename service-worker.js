@@ -1,4 +1,4 @@
-const CACHE_NAME = "mp-mission-school-v1";
+const CACHE_NAME = "mp-mission-school-v2";
 const APP_FILES = [
   "./",
   "./index.html",
